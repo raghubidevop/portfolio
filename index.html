@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raghuram Munirathnam | Senior Power BI Developer Portfolio</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        :root {
+            --bg-main: #0d1117;
+            --bg-card: #161b22;
+            --border-color: #30363d;
+            --text-main: #c9d1d9;
+            --text-bright: #f0f6fc;
+            --accent-pbi: #f2c811; /* Power BI Yellow */
+            --accent-blue: #58a6ff; /* SQL/Azure Blue */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+
+        header {
+            background-color: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .header-container h1 {
+            color: var(--text-bright);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: var(--accent-pbi);
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .contact-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s;
+        }
+
+        .contact-links a:hover {
+            color: var(--accent-blue);
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        section {
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: var(--text-bright);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* KPI Matrix Dashboard Layout */
+        .kpi-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .kpi-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background-color: var(--accent-pbi);
+        }
+
+        .kpi-card.blue::before {
+            background-color: var(--accent-blue);
+        }
+
+        .kpi-value {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: var(--text-bright);
+            margin-bottom: 5px;
+        }
+
+        .kpi-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #8b949e;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-category {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .skill-category h3 {
+            color: var(--accent-blue);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            background-color: var(--bg-main);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .tag.highlight {
+            border-color: var(--accent-pbi);
+            color: var(--accent-pbi);
+        }
+
+        /* Projects Section with Live Interactive Filtering */
+        .filter-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--accent-pbi);
+            color: #000;
+            border-color: var(--accent-pbi);
+            font-weight: 600;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .project-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            border-color: #444c56;
+        }
+
+        .project-title {
+            color: var(--text-bright);
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+        }
+
+        .project-duration {
+            font-size: 0.8rem;
+            color: #8b949e;
+            margin-bottom: 15px;
+        }
+
+        .project-desc {
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            color: #8b949e;
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 5px;
+            bottom: 5px;
+            width: 2px;
+            background-color: var(--border-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -27px;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--accent-blue);
+            border: 3px solid var(--bg-main);
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
+        }
+
+        .role-title {
+            color: var(--text-bright);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .company-name {
+            color: var(--accent-pbi);
+            font-weight: 500;
+        }
+
+        .duration {
+            color: #8b949e;
+            font-size: 0.9rem;
+        }
+
+        .timeline-body ul {
+            padding-left: 20px;
+            font-size: 0.95rem;
+            color: #8b949e;
+        }
+
+        .timeline-body li {
+            margin-bottom: 6px;
+        }
+
+        @media (max-width: 768px) {
+            .timeline-header {
+                flex-direction: column;
+            }
+            .duration {
+                margin-top: 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <h1>Raghuram Munirathnam</h1>
+            <div class="subtitle">Senior Power BI Developer</div>
+            <div class="contact-links">
+                <a href="mailto:raghu.bidevop@gmail.com"><i class="fas fa-envelope"></i> raghu.bidevop@gmail.com</a>
+                <a href="tel:+917680884442"><i class="fas fa-phone"></i> +91-7680884442</a>
+                <a href="https://www.linkedin.com/in/raghu-bidevop" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                <a href="#"><i class="fas fa-map-marker-alt"></i> Hyderabad, India</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- KPI Dashboard Section -->
+        <section>
+            <div class="kpi-container">
+                <div class="kpi-card">
+                    <div class="kpi-value">5.5+ Yrs</div>
+                    <div class="kpi-label">Total Analytics Experience</div>
+                </div>
+                <div class="kpi-card blue">
+                    <div class="kpi-value">PL-300</div>
+                    <div class="kpi-label">Microsoft Certified Data Analyst</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">30%</div>
+                    <div class="kpi-label">DAX Query Speed Optimization</div>
+                </div>
+                <div class="kpi-card blue">
+                    <div class="kpi-value">25%</div>
+                    <div class="kpi-label">SQL Performance Gain</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Skills Matrix -->
+        <section id="skills">
+            <h2><i class="fas fa-laptop-code"></i> Enterprise Tech Stack Matrix</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>BI & Visualization</h3>
+                    <div class="tags">
+                        <span class="tag highlight">Power BI</span>
+                        <span class="tag">SSAS Tabular Models</span>
+                        <span class="tag">Tableau</span>
+                        <span class="tag">Data Storytelling</span>
+                        <span class="tag">Report Dashboards</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Data Engineering & Backend</h3>
+                    <div class="tags">
+                        <span class="tag highlight">SQL (T-SQL)</span>
+                        <span class="tag">Power Query (M)</span>
+                        <span class="tag">ETL Pipelines</span>
+                        <span class="tag">Azure Data Lakes / Dataflows</span>
+                        <span class="tag">Python (Pandas, NumPy)</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Governance & Security</h3>
+                    <div class="tags">
+                        <span class="tag highlight">Row-Level Security (RLS)</span>
+                        <span class="tag">Workspace Administration</span>
+                        <span class="tag">Data Governance</span>
+                        <span class="tag">Tenant-to-Tenant Migration</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Featured Projects Section -->
+        <section id="projects">
+            <h2><i class="fas fa-chart-pie"></i> Selected Analytics Deployments</h2>
+            <div class="filter-container">
+                <button class="filter-btn active" onclick="filterProjects('all')">All Frameworks</button>
+                <button class="filter-btn" onclick="filterProjects('pm')">Procurement & Ops</button>
+                <button class="filter-btn" onclick="filterProjects('fin')">Financial BI</button>
+            </div>
+
+            <div class="projects-grid">
+                <div class="project-card" data-cat="pm">
+                    <div>
+                        <div class="project-title">Construction Workflow Monitoring & Analytics</div>
+                        <div class="project-duration"><i class="far fa-calendar-alt"></i> 6 Months Deployment</div>
+                        <p class="project-desc">Integrated real-time pipelines to create dynamic timeline dashboards detailing Baseline vs Actual project milestones. Engineered DAX-driven targets evaluating actual output tracking metrics.</p>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Power BI</span>
+                        <span class="tag">Power Query</span>
+                        <span class="tag">SQL</span>
+                    </div>
+                </div>
+
+                <div class="project-card" data-cat="fin">
+                    <div>
+                        <div class="project-title">Project Profitability Intelligence Solution</div>
+                        <div class="project-duration"><i class="far fa-calendar-alt"></i> 6 Months Deployment</div>
+                        <p class="project-desc">Designed an end-to-end automated analytics solution for tracking property margins, cash injection parameters, structural ROI, and dynamic Internal Rate of Return (IRR) metrics for executives.</p>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Advanced DAX</span>
+                        <span class="tag">Financial Modeling</span>
+                        <span class="tag">SSAS</span>
+                    </div>
+                </div>
+
+                <div class="project-card" data-cat="pm">
+                    <div>
+                        <div class="project-title">Purchase & Bid Procurement Optimization</div>
+                        <div class="project-duration"><i class="far fa-calendar-alt"></i> 12 Months Deployment</div>
+                        <p class="project-desc">Architected tracking logic analyzing dynamic bidding metrics, active vendor supply patterns, and procurement pipeline execution variables to limit structural sourcing costs.</p>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Power BI Service</span>
+                        <span class="tag">Data Architecture</span>
+                    </div>
+                </div>
+
+                <div class="project-card" data-cat="fin">
+                    <div>
+                        <div class="project-title">Automated Vendor Payments Ledger System</div>
+                        <div class="project-duration"><i class="far fa-calendar-alt"></i> 6 Months Deployment</div>
+                        <p class="project-desc">Built a secure system monitoring upcoming cash dues, overdue structures, outstanding balances, and transactional modes (ACH, Cheque, Instant Transfer) for enterprise treasury visibility.</p>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Row-Level Security</span>
+                        <span class="tag">Dataflows</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Professional Timeline -->
+        <section id="experience">
+            <h2><i class="fas fa-briefcase"></i> Data Analytics Milestones</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div>
+                            <span class="role-title">Senior Power BI Developer</span> — 
+                            <span class="company-name">MSRCosmos GROUP</span>
+                        </div>
+                        <span class="duration">Dec 2022 — Present</span>
+                    </div>
+                    <div class="timeline-body">
+                        <ul>
+                            <li>Optimized datasets using advanced DAX architecture and Tabular models, delivering a 30% jump in dashboard query processing speeds.</li>
+                            <li>Engineered robust complex T-SQL views and procedures, yielding an immediate 25% performance optimization across large transactional architectures.</li>
+                            <li>Executed secure deployment frameworks involving Row-Level Security (RLS) policies along with successful tenant-to-tenant structural artifact migrations.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div>
+                            <span class="role-title">Data Analyst</span> — 
+                            <span class="company-name">Mansha Software India PVT LTD</span>
+                        </div>
+                        <span class="duration">Oct 2020 — Dec 2022</span>
+                    </div>
+                    <div class="timeline-body">
+                        <ul>
+                            <li>Managed complex enterprise environments on Power BI Service, tracking dataset scheduled refresh tasks to yield certified 99% data availability constraints.</li>
+                            <li>Leveraged structured Power Query (M) scripting steps to execute automated corporate data cleaning workflows, boosting final metric reliability parameters by 20%.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function filterProjects(category) {
+            const cards = document.querySelectorAll('.project-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-cat') === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
